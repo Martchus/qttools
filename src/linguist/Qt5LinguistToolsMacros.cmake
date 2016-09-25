@@ -104,8 +104,9 @@ function(QT5_CREATE_TRANSLATION _qm_files)
         if(NOT EXISTS "${full_stamp_file_dir}")
             file(MAKE_DIRECTORY "${full_stamp_file_dir}")
         endif()
+        get_target_property(LUPDATE_LOC ${Qt5_LUPDATE_EXECUTABLE} IMPORTED_LOCATION)
         add_custom_command(OUTPUT ${stamp_file}
-            COMMAND ${Qt5_LUPDATE_EXECUTABLE}
+            COMMAND ${LUPDATE_LOC}
             ARGS ${_lupdate_options} "@${_ts_lst_file}" -ts ${_ts_file}
             COMMAND ${CMAKE_COMMAND} -E touch "${stamp_file}"
             DEPENDS ${_dependencies}
@@ -155,9 +156,9 @@ function(QT5_ADD_TRANSLATION _qm_files)
         else()
             set(qm_dep "${_abs_FILE}")
         endif()
-
+        get_target_property(LRELEASE_LOC ${Qt5_LRELEASE_EXECUTABLE} IMPORTED_LOCATION)
         add_custom_command(OUTPUT ${qm}
-            COMMAND ${Qt5_LRELEASE_EXECUTABLE}
+            COMMAND ${LRELEASE_LOC}
             ARGS ${_LRELEASE_OPTIONS} ${_abs_FILE} -qm ${qm}
             DEPENDS ${qm_dep} VERBATIM
         )
