@@ -1,4 +1,5 @@
 QT += help widgets
+QTPLUGIN.bearer=-
 
 SOURCES += conversionwizard.cpp \
            inputpage.cpp \
