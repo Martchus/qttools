@@ -183,6 +183,14 @@ if(QT_INSTALL_XDG_DESKTOP_ENTRIES)
     endif()
 endif()
 
+if(MINGW)
+    # enable only SQL plugins which are known to work
+    # note: The static plugins for MySQL/PostgreSQL don't work because these libs come with their
+    #       own pthread implementation which has conflicting symbols with the normal pthread library
+    #       leading to linker errors.
+    qt_import_plugins(assistant INCLUDE_BY_TYPE sqldrivers Qt6::QSQLiteDriverPlugin Qt6::QODBCDriverPlugin)
+endif()
+
 if(APPLE)
     set_target_properties(assistant PROPERTIES
         MACOSX_BUNDLE_INFO_PLIST "${CMAKE_CURRENT_SOURCE_DIR}/Info_mac.plist"
