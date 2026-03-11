@@ -213,6 +213,7 @@ qt_internal_add_tool(${target_name}
         QT_NO_KEYWORDS
         # To provide the ability to workaround version-specific Clang issues.
         # A re-export of (LLVM|CLANG)_VERSION_MAJOR done in WrapLibClang.cmake
+        QT_NO_EMIT
         LIBCLANG_VERSION_MAJOR=${QT_LIB_CLANG_VERSION_MAJOR}
 )
 

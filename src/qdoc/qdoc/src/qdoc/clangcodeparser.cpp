@@ -45,7 +45,12 @@
 #include <clang/Lex/Lexer.h>
 #include <llvm/Support/Casting.h>
 
-#include "clang/AST/QualTypeNames.h"
+#if LIBCLANG_VERSION_MAJOR >= 22
+// LLVM 22 provides a compatible QualTypeNames implementation in libclang.
+#  include <clang/AST/QualTypeNames.h>
+#else
+#  include "clang/AST/QualTypeNames.h"
+#endif
 #include "template_declaration.h"
 
 #include <algorithm>
